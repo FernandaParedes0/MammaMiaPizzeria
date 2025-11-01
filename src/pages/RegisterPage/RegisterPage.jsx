@@ -33,8 +33,8 @@ function RegisterPage() {
             return;
         }
 
-        if (password.length < 8) {
-        setErrorMessage("La contraseña debe tener al menos 8 caracteres");
+        if (password.length < 6) {
+        setErrorMessage("La contraseña debe tener al menos 6 caracteres");
         return; 
         }
 
