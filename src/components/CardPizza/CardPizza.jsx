@@ -4,7 +4,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
 import "./cardpizza.css";
 
+
 function CardPizza(props) {
+
    return (
       <>
         <Card style={{ width: "18rem" }}>
@@ -13,9 +15,15 @@ function CardPizza(props) {
             <Card.Title>{props.name}</Card.Title>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>Ingredientes</ListGroup.Item>
-            <ListGroup.Item>{props.ingredients.join(", ")}</ListGroup.Item>
-            <ListGroup.Item>${props.price.toLocaleString("es-CL")}</ListGroup.Item>
+            <ListGroup.Item>
+              Ingredientes: 
+              <ul>
+              {props.ingredients.map(ingredient => (
+                <li key={ingredient}> {ingredient} </li>
+              ))}
+            </ul>           
+            </ListGroup.Item>
+            <ListGroup.Item>Precio: ${props.price.toLocaleString("es-CL")}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
           <div className="d-flex gap-2">

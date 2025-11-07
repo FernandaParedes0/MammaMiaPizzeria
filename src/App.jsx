@@ -8,6 +8,7 @@ import Home from './components/Home/Home'
 import Footer from './components/Footer/Footer'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
+import Cart from './components/Cart/Cart'
 
 function App() {
 
@@ -15,10 +16,16 @@ function App() {
     <>
       <CustomNavbar></CustomNavbar>
       {/* <Header></Header> */}
-      {/* <Home></Home> */}
+
       {/* Hito número 2 */}
       {/* <RegisterPage></RegisterPage> */}
-      <LoginPage></LoginPage>
+      {/* <LoginPage></LoginPage> */}
+
+
+      {/* Hito número 3 */}
+      <Home></Home>
+      <Cart></Cart>
+
       <Footer></Footer>
     </>
   )

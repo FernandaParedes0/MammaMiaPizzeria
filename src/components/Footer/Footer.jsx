@@ -66,7 +66,7 @@ function Footer() {
                 </p>
               </div>
             </div>
-            <div class="col">
+            <div className="col">
               <div className="mt-3">
                 <h6 className="uppercase mb-4 font-semibold">Contacto</h6>
                 {/* Contacto */}

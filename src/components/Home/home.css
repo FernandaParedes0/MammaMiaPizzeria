@@ -4,7 +4,7 @@
     max-width: 70%;
     margin: 30px auto;
     justify-content: center;
-    column-gap: 20px;
+    gap: 20px;
     justify-items: center;
 ;}
 
