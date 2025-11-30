@@ -1,9 +1,10 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import { CartContext } from "../../contexts/CartContext";
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,12 +15,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function CustomNavbar() {
-  const total = 25000;
+  const { total } = useContext(CartContext);
   const totalPrecio = total.toLocaleString("es-ES");
   const token = false;
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar bg="dark" data-bs-theme="dark" fixed="top">
         <Container>
           <Link to="/" className="text-white ms-3 text-decoration-none d-flex gap-1 align-items-center">
             <FontAwesomeIcon icon={faHouse} className="w-4 h-4 text-gray-400 " />
@@ -80,7 +81,7 @@ function CustomNavbar() {
                   <FontAwesomeIcon
                 icon={faBasketShopping}
                 className="w-4 h-4 text-gray-400"
-              /> Total: ${totalPrecio}
+              /> {(total || 0).toLocaleString("es-CL")}
                 </Link>
             </Button>
           </Nav>
