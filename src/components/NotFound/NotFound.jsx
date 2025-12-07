@@ -10,7 +10,7 @@ function NotFound() {
       
       Esta página no se encuentra disponible :(
       </h5>  
-     <div className='text-center mt-3'> {/* Opcional: añadir un margen superior (mt-3) */}
+     <div className='text-center mt-3'>
     <Link to="/" className="btn btn-primary text-white">
       Volver a Home
     </Link>

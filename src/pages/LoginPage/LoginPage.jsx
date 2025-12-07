@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AlertsMessage from "../../components/Alerts/AlertsMessage";
-import { useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,9 @@ function LoginPage() {
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const validarDatos = (e) => {
     e.preventDefault();
@@ -28,9 +32,17 @@ function LoginPage() {
     }
 
     if (password === "123456") {
-      setSuccessMessage("¡Ingreso exitoso!");
+      
+      login(); 
+      
+      setSuccessMessage("¡Ingreso exitoso! Redirigiendo...");
       setEmail("");
       setPassword("");
+      
+      setTimeout(() => {
+        navigate("/"); 
+      }, 1000);
+      
       return;
     }
     setErrorMessage("La contraseña es incorrecta");

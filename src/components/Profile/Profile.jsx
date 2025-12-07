@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Iniciales from '../../assets/img/iniciales.png'; 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faMapMarkerAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons'; 
+import { UserContext } from '../../contexts/UserContext'; 
 
 const Profile = () => {
+  const { logout } = useContext(UserContext); 
+  const navigate = useNavigate(); 
+
   const user = {
     name: "Fernanda Paredes",
     location: "Chile",
@@ -13,14 +17,15 @@ const Profile = () => {
     imageUrl: Iniciales
   };
 
+  const handleLogout = () => {
+    logout(); 
+    navigate('/login'); 
+  }
 
   return (
     <section className="bg-gray-100 min-h-screen flex items-center justify-center p-4 md:p-8 font-['Inter']">
       <div className="max-w-md w-full">
-        
         <div className="bg-white rounded-xl shadow-2xl p-8 text-center border-t-4 border-blue-600">
-          
-          {/* Imagen de Perfil */}
           <img
             src={user.imageUrl}
             alt="Avatar"
@@ -42,11 +47,9 @@ const Profile = () => {
           </p>
           
           <div className="mt-8 pt-4 border-t border-gray-100">
-            
-
-            <Button variant="danger">
-              <FontAwesomeIcon icon={faSignOutAlt} className="w-5 h-5 mr-2" />Cerrar Sesión</Button>
-
+            <Button variant="danger" onClick={handleLogout}>
+              <FontAwesomeIcon icon={faSignOutAlt} className="w-5 h-5 mr-2" />Cerrar Sesión
+            </Button>
           </div>
         </div>
       </div>

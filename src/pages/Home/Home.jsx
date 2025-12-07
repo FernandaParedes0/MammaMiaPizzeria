@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Pizza from "../Pizza/Pizza.jsx"; 
+import CardPizza from "../../components/CardPizza/CardPizza";
 import "./home.css";
 
 function Home() {
@@ -32,7 +32,7 @@ function Home() {
       {" "}
       <div className="containerCards">
         {pizzas.length > 0 ? (
-          pizzas.map((pizza) => <Pizza key={pizza.id} pizzaData={pizza} />)
+          pizzas.map((pizza) => <CardPizza key={pizza.id} pizzaData={pizza} />)
         ) : (
           <p>¡Hay que levantar la API! :)</p>
         )}

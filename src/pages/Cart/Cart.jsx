@@ -5,8 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from '../../contexts/CartContext.jsx';
+import { UserContext } from "../../contexts/UserContext";
 
 function Cart() {
+  const { token } = useContext(UserContext);
+
   const { 
     cartItems, 
     increaseQuantity, 
@@ -34,7 +37,18 @@ function Cart() {
       </>
       
       <h6 className='mt-5'>Total: ${total.toLocaleString("es-CL")} </h6>
-      <Button className='mt-2'>Pagar</Button>
+      
+      <Button 
+      className='mt-2' 
+      disabled={!token}
+    >
+      Pagar
+    </Button>
+    {!token && (
+          <p className='text-danger mt-2'>
+              Debes iniciar sesión para pagar.
+          </p>
+      )}
     </Container>
   )
 }

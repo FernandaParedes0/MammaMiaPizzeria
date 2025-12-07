@@ -1,18 +1,50 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
-import { CartContext } from "../../contexts/CartContext"; 
+import { CartContext } from "../../contexts/CartContext";
+import { useParams} from 'react-router-dom';
 
-function Pizza({ pizzaData = {} }) { 
+
+function Pizza() { 
     
-    const { name, price, desc, img, ingredients } = pizzaData;
+    const { id } = useParams(); 
+
+    const [pizza, setPizza] = useState(null); 
+    const [loading, setLoading] = useState(true);
+
+    const { addToCart } = useContext(CartContext);
+
+    useEffect(() => {
+        if (id) {
+            DetallePizza(id);
+        }
+    }, [id]);
+
+    const DetallePizza = async (pizzaId) => {
+        try {
+            setLoading(true);
+            const response = await fetch(`http://localhost:5000/api/pizzas/${pizzaId}`); 
+            if (!response.ok) {
+                setLoading(false);
+                return;
+            }
+            const data = await response.json();
+            setPizza(data); 
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+        }
+    };
+
+    if (loading) return <p>Cargando información de la pizza...</p>;
+    if (!pizza) return <p>Pizza no encontrada. :(</p>;
+
+    const { name, price, desc, img, ingredients } = pizza;
+
     
     const validIngredients = ingredients || []; 
 
-    const { addToCart } = useContext(CartContext); 
-    
-    if (!name) return null; 
 
     return (
         <Card className="m-5" style={{ width: "18rem" }}>
@@ -37,11 +69,10 @@ function Pizza({ pizzaData = {} }) {
             </ListGroup>
             <Card.Body>
                 <div className="d-flex gap-2">
-                    <Button variant="outline-secondary">Ver más</Button>
-                    <Button
-                        variant="primary"
-                        style={{ backgroundColor: "#FF8C00", border: "none" }}
-                        onClick={() => addToCart(pizzaData)} 
+                    <Button 
+                    variant="primary"
+                    style={{ backgroundColor: "#FF8C00", border: "none" }}
+                    onClick={() => addToCart(pizza)}
                     >
                         Añadir
                     </Button>
